@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 // Rotas
 require("./src/routes/routesLogin")(app);
 require("./src/routes/partnerRoutes")(app);
+require("./src/routes/routesCadastro")(app);
 
 // Porta que o servidor vai escutar
 const PORT = process.env.PORT || 3001;
