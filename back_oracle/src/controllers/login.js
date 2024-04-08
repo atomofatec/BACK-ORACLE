@@ -1,26 +1,26 @@
-// UserController.js
-const UserModel = require('../models/login');
-const bcrypt = require('bcryptjs');
+require("dotenv").config();
+const User = require("../models/login");
 
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await UserModel.findUserByEmail(email);
-    if (!user) {
-      return res.status(404).send('Usuário não encontrado');
+exports.login = async (req, res) => {
+    try {
+        // Busca o usuário pelo email
+        let user = await User.findByEmail(req.body.email);
+
+        // Verifica se o usuário existe e se a senha está correta
+        if (user.length) {
+            const samePass = req.body.password === user[0].password;
+
+            if (samePass) {
+                // Se o usuário existe e a senha está correta, retorna uma mensagem de sucesso
+                user = await User.findById(user[0].user_id);
+                res.send("Login bem-sucedido!");
+                return;
+            }
+        }
+
+        res.status(400).send("Usuário ou senha inválidos");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Erro ao processar requisição!");
     }
-
-    const passwordIsValid = bcrypt.compareSync(password, user.password);
-    if (!passwordIsValid) {
-      return res.status(401).send({ auth: false, token: null });
-    }
-
-    // Direcionando para a tela do tipo de usuário
-    res.status(200).send({ auth: true, userType: user.type });
-  } catch (error) {
-    console.error("Login error: ", error);
-    res.status(500).send("Houve um problema ao fazer login.");
-  }
 };
-
-module.exports = { loginUser };

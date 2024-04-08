@@ -1,10 +1,34 @@
-// UserModel.js
-const connection = require('../db/index'); // O arquivo de conexão que você forneceu
+const sql = require("../db/index");
 
-const findUserByEmail = async (email) => {
-  const query = 'SELECT * FROM users WHERE email = $1';
-  const user = await connection.query(query, [email]);
-  return user.rows[0];
+const User = function (user) {
+    this.user_id = user.user_id;
+    this.email = user.email;
+    this.password = user.password;
+    this.type = user.type;
 };
 
-module.exports = { findUserByEmail };
+// Função para buscar um usuário pelo ID
+User.findById = async (id) => {
+    const result = await sql.query(
+        `
+        SELECT user_id, email, type
+        FROM users
+        WHERE user_id = ($1)
+    `,
+        [id]
+    );
+    return result.rows[0];
+};
+
+// Função para buscar um usuário pelo email
+User.findByEmail = async (email) => {
+    const result = await sql.query(
+        `SELECT user_id, password
+                                    FROM users
+                                    WHERE email = ($1) `,
+        [email]
+    );
+    return result.rows;
+};
+
+module.exports = User;

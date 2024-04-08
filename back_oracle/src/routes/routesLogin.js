@@ -1,8 +1,9 @@
-// authRoutes.js
-const express = require('express');
-const router = express.Router();
-const UserController = require('../controllers/login');
+module.exports = (app) => {
+    const userLogin = require("../controllers/login");
 
-router.post('/login', UserController.loginUser);
+    var router = require("express").Router();
 
-module.exports = router;
+    router.post("/login", userLogin.login); // Rota de login
+
+    app.use("/api", router); // Define a rota base para as rotas
+};
