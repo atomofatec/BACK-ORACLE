@@ -1,4 +1,4 @@
-const connection = require('../db/db');
+const connection = require('../db/index');
 
 const findUserByEmail = async (email) => {
   const query = 'SELECT * FROM users WHERE email = $1';
