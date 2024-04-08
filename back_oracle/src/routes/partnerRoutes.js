@@ -1,4 +1,3 @@
-// partnerRoutes.js
 module.exports = (app) => {
     const partnerController = require("../controllers/partnerController");
 
