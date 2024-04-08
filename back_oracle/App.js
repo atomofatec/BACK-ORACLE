@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+const express = require("express");
+const cors = require("cors");
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const app = express(); // Inicializa o servidor
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+// var corsOptions = {
+//   origin: "http://localhost:3000", //front
+// };
+
+// app.use(cors(corsOptions));
+
+app.use(cors()); // Aceita requisições de qualquer origem
+
+app.use(express.json()); // Aceita requisições no formato JSON
+app.use(express.urlencoded({ extended: true })); // Aceita requisições no formato URL
+
+// Rota inicial
+app.get("/", (req, res) => {
+    res.json({ message: "Application is running." });
+});
+
+// Rotas
+require("./src/routes/routesLogin")(app);
+
+// Porta que o servidor vai escutar
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
 });
