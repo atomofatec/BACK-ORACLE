@@ -1,21 +1,28 @@
-const connection = require('../db/index'); 
+// partnerModel.js
+const sql = require("../db/index");
 const bcrypt = require('bcrypt');
 
-// Função para criar um usuário
-async function createPartner(name, email, password) {
+const Partner = {};
+
+Partner.create = async (name, email, password) => {
     try {
-      
-      const hashedPassword = await bcrypt.hash(password, 10);
-      
-      const query = 'INSERT INTO users (user_name, email, password, type) VALUES ($1, $2, $3, $4) RETURNING *';
-      const values = [name, email, hashedPassword, 'parceiro'];
-      const result = await connection.query(query, values);
-  
-      return result.rows[0];
+        // Hash da senha
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Consulta SQL para inserir o usuário
+        const query = 'INSERT INTO users (user_name, email, password, type) VALUES ($1, $2, $3, $4) RETURNING *';
+        const values = [name, email, hashedPassword, 'parceiro'];
+
+        // Executar a consulta
+        const result = await sql.query(query, values);
+
+        // Retornar o usuário criado
+        return result.rows[0];
     } catch (error) {
-      console.error('Erro ao criar usuário:', error);
-      throw error;
+        // Tratamento de erros
+        console.error('Erro ao criar parceiro:', error.message);
+        throw error;
     }
-}
-  
-module.exports = { createPartner };
+};
+
+module.exports = Partner;

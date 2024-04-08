@@ -1,7 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const partnerController = require('../controllers/partnerController');
+// partnerRoutes.js
+module.exports = (app) => {
+    const partnerController = require("../controllers/partnerController");
 
-router.post('/register', partnerController.createPartner);
+    var router = require("express").Router();
 
-module.exports = router;
+    router.post("/register", partnerController.createPartner);
+
+    app.use("/api", router);
+}

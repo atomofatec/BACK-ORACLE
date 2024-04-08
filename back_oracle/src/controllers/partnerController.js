@@ -1,12 +1,21 @@
-const partnerModel = require('../models/partnerModel');
+// partnerController.js
+const Partner = require('../models/partnerModel');
 
-exports.createPartner = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    const partner = await partnerModel.createPartner(name, email, password);
-    res.status(201).json(partner);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erro ao criar usuário' });
-  }
+const partnerController = {
+    createPartner: async (req, res) => {
+        const { name, email, password } = req.body;
+
+        try {
+            // Cria um novo parceiro
+            const newPartner = await Partner.create(name, email, password);
+            
+            // Retorna o parceiro criado
+            res.status(201).json(newPartner);
+        } catch (error) {
+            // Se houver um erro, retorna uma mensagem de erro
+            res.status(500).json({ error: 'Erro ao criar parceiro' });
+        }
+    }
 };
+
+module.exports = partnerController;
