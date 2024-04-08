@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 require("./src/routes/routesLogin")(app);
 
 // Porta que o servidor vai escutar
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
