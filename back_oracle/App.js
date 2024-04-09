@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const listUsersRoute = require("./src/models/listUsersRoute");
 
 const app = express(); // Inicializa o servidor
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 require("./src/routes/routesLogin")(app);
 require("./src/routes/partnerRoutes")(app);
 require("./src/routes/routesCadastro")(app);
+app.use('/', listUsersRoute);
 
 // Porta que o servidor vai escutar
 const PORT = process.env.PORT || 3001;
