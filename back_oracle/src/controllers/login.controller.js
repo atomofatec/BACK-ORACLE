@@ -1,5 +1,5 @@
 require("dotenv").config();
-const User = require("../models/login");
+const User = require("../models/login.model");
 
 exports.login = async (req, res) => {
     try {

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const listUsersRoute = require("./src/models/listUsersRoute");
+//const listUsersRoute = require("./src/models/listUsersRoute");
 
 const app = express(); // Inicializa o servidor
 
@@ -21,10 +21,12 @@ app.get("/", (req, res) => {
 });
 
 // Rotas
-require("./src/routes/routesLogin")(app);
-require("./src/routes/partnerRoutes")(app);
-require("./src/routes/routesCadastro")(app);
-app.use('/', listUsersRoute);
+require("./src/routes/login.routes")(app);
+require("./src/routes/registerPartner.routes")(app);
+require("./src/routes/registerAdmFunc.routes")(app);
+require("./src/routes/listUser.routes")(app);
+
+//app.use('/', listUsersRoute);
 
 // Porta que o servidor vai escutar
 const PORT = process.env.PORT || 3001;

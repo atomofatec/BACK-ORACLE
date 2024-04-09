@@ -1,13 +1,12 @@
 module.exports = (app) => {
-    const cadastro = require("../controllers/cadastro");
+    const cadastro = require("../controllers/registerAdmFunc.controller");
 
     var router = require("express").Router();
 
     router.post("/cadastro", cadastro.createUser);
 
     app.use("/api", router);
-
-}
+};
 
 // const express = require('express');
 // const router = express.Router();
