@@ -4,6 +4,7 @@
 //dados
 const express = require('express');
 const connectToDatabase = require('../db/db');
+const connection = require('../db/index');
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.get('/listUsers', async (req, res) => {
 
   try {
     await client.connect();
-    const result = await client.query('SELECT * FROM users');
+    const result = await connection.query('SELECT * FROM users');
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching users:', error);

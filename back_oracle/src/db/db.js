@@ -5,7 +5,7 @@ function connectToDatabase() {
   const client = new Client({
     user: 'postgres',
     host: 'localhost',
-    database: 'api',
+    database: 'db_oracle',
     password: 'fatec',
     port: 5432,
   });
