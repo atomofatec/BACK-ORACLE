@@ -12,8 +12,7 @@ exports.login = async (req, res) => {
 
             if (samePass) {
                 // Se o usuário existe e a senha está correta, retorna uma mensagem de sucesso
-                user = await User.findById(user[0].user_id);
-                res.send("Login bem-sucedido!");
+                res.send({ message: "Login bem-sucedido!", userType: user[0].type });
                 return;
             }
         }
