@@ -16,6 +16,28 @@ const partnerController = {
             res.status(500).json({ error: "Erro ao criar parceiro" });
         }
     },
+
+    updateTest: async (req, res) => {
+        try {
+            const { userId, trackId, testNumber, testGrade } = req.body;
+            const updatedTest = await Partner.update(userId, trackId, testNumber, testGrade);
+            
+            res.status(201).json(updatedTest)
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
+
+    selectExpertise: async (req, res) => {
+        try {
+            const {userId} = req.body;
+            const selectedExpertise = await Partner.select(userId);
+            
+            res.status(201).json(selectedExpertise)
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }    
+    }
 };
 
 module.exports = partnerController;
