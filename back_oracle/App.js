@@ -27,6 +27,7 @@ require("./src/routes/registerAdmFunc.routes")(app);
 require("./src/routes/listUser.routes")(app);
 require('./src/routes/attPartner.routes')(app);
 require("./src/routes/deletePartner.routes")(app);
+require("./src/routes/findById.routes")(app);
 
 //app.use('/', listUsersRoute);
 

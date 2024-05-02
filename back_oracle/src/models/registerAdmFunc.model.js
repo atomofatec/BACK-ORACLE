@@ -14,11 +14,11 @@ const createUser = async (userData) => {
         password,
         type,
         benefits,
-        track_id,
-        expertise_id,
+        createdAt,
+        updatedAt,
     } = userData;
     const query = `
-    INSERT INTO users (user_name, email, password, type, benefits, track_id, expertise_id)
+    INSERT INTO users (user_name, email, password, type, benefits, createdAt, updatedAt)
     VALUES ($1, $2, $3, $4, $5, $6, $7)
   `;
     await connection.query(query, [
@@ -27,8 +27,8 @@ const createUser = async (userData) => {
         password,
         type,
         benefits,
-        track_id,
-        expertise_id,
+        createdAt,
+        updatedAt,
     ]);
 };
 

@@ -1,14 +1,14 @@
 const UserModel = require("../models/registerAdmFunc.model");
 
 const createUser = async (req, res) => {
+    const createdAt = new Date();
+    const updatedAt = new Date();
     const {
         user_name,
         email,
         password,
         type,
         benefits,
-        track_id,
-        expertise_id,
     } = req.body;
 
     // Verifica o tipo de usuário que está realizando o cadastro
@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
         // Se usuário = admin, tem permissão para cadastrar apenas admin e funcionario
         if (userType === "admin") {
             // Verifica se o tipo a ser cadastrado é admin ou funcionario
-            if (type !== "admin" && type !== "funcionario") {
+            if (type !== "admin" && type !== "funcionário") {
                 return res
                     .status(403)
                     .send("Você não tem permissão para realizar esta operação");
@@ -43,8 +43,8 @@ const createUser = async (req, res) => {
             password,
             type,
             benefits,
-            track_id,
-            expertise_id,
+            createdAt,
+            updatedAt,
         });
 
         // Retorna sucesso

@@ -7,13 +7,13 @@ const updatePartner = async (req, res) => {
 
   try {
     // Verifica se o parceiro existe no banco de dados
-    const partner = await PartnerModel.findById(partnerId);
+    const partner = await PartnerModel.findPartnerById(partnerId);
     if (!partner) {
       return res.status(404).send('Parceiro não encontrado');
     }
 
     // Atualiza as informações do parceiro
-    await PartnerModel.findByIdAndUpdate(partnerId, partnerUpdates);
+    await PartnerModel.updatePartner(partnerId, partnerUpdates);
 
     res.status(200).send('Parceiro atualizado com sucesso');
   } catch (error) {
