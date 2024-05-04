@@ -23,7 +23,7 @@ User.findById = async (id) => {
 // Função para buscar um usuário pelo email
 User.findByEmail = async (email) => {
     const result = await sql.query(
-        `SELECT user_id, password, type
+        `SELECT user_id, password, type, user_name, email, benefits, createdat, updatedat
         FROM users
         WHERE email = ($1)`,
         [email]

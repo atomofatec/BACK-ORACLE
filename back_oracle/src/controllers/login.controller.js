@@ -12,7 +12,7 @@ exports.login = async (req, res) => {
 
             if (samePass) {
                 // Se o usuário existe e a senha está correta, retorna uma mensagem de sucesso
-                res.send({ message: "Login bem-sucedido!", userType: user[0].type });
+                res.send({ message: "Login bem-sucedido!", userID: user[0].user_id, userName: user[0].user_name, email: user[0].email, userType: user[0].type, benefits: user[0].benefits, createdAt: user[0].createdat, updatedAt: user[0].updatedat});
                 return;
             }
         }

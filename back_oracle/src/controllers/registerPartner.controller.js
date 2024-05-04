@@ -30,8 +30,8 @@ const partnerController = {
 
     selectExpertise: async (req, res) => {
         try {
-            const {userId} = req.body;
-            const selectedExpertise = await Partner.select(userId);
+            const {trackId} = req.body;
+            const selectedExpertise = await Partner.select(trackId);
             
             res.status(201).json(selectedExpertise)
         } catch (error) {

@@ -84,7 +84,7 @@ Partner.update = async (userId, trackId, testNumber, testGrade) => {
 Partner.select = async (userId) => {
     try {
         const query =
-            "SELECT * from expertises WHERE user_id = $1";
+            "SELECT * from expertises WHERE track_id = $1";
 
         const values = [userId];
         const result = await sql.query(query, values);
