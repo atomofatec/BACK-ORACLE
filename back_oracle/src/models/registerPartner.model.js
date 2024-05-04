@@ -81,17 +81,19 @@ Partner.update = async (userId, trackId, testNumber, testGrade) => {
     }   
 };
 
-Partner.select = async (trackId) => {
+Partner.selectWithUser = async (trackId) => {
     try {
-        const query =
-            "SELECT * from expertises WHERE track_id = $1";
-
+        const query = `
+            SELECT e.*, u.* 
+            FROM expertises e
+            JOIN users u ON e.user_id = u.user_id
+            WHERE e.track_id = $1
+        `;
         const values = [trackId];
         const result = await sql.query(query, values);
         return result.rows;
-
     } catch (error) {
-        console.error("Erro ao retornar expertises:", error.message);
+        console.error("Erro ao retornar expertises com usuário:", error.message);
         throw error;
     }   
 };

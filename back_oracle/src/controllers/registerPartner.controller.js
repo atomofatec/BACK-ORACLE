@@ -30,14 +30,15 @@ const partnerController = {
 
     selectExpertise: async (req, res) => {
         try {
-            const {trackId} = req.body;
-            const selectedExpertise = await Partner.select(trackId);
+            const { trackId } = req.body;
+            const expertisesWithUser = await Partner.selectWithUser(trackId);
             
-            res.status(201).json(selectedExpertise)
+            res.status(200).json(expertisesWithUser);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }    
     }
+
 };
 
 module.exports = partnerController;
