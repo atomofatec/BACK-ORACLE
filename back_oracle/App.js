@@ -29,6 +29,7 @@ require('./src/routes/attPartner.routes')(app);
 require("./src/routes/deletePartner.routes")(app);
 require("./src/routes/findById.routes")(app);
 require("./src/routes/listUserExpertises")(app);
+require("./src/routes/deleteUsers.routes")(app);
 
 //app.use('/', listUsersRoute);
 
