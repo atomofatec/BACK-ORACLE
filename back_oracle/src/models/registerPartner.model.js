@@ -81,12 +81,12 @@ Partner.update = async (userId, trackId, testNumber, testGrade) => {
     }   
 };
 
-Partner.select = async (userId) => {
+Partner.select = async (trackId) => {
     try {
         const query =
             "SELECT * from expertises WHERE track_id = $1";
 
-        const values = [userId];
+        const values = [trackId];
         const result = await sql.query(query, values);
         return result.rows;
 

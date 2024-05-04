@@ -7,7 +7,7 @@ module.exports = (app) => {
 
     router.post("/updateTest", partnerController.updateTest);
 
-    router.get("/selectExpertise", partnerController.selectExpertise);
+    router.post("/selectExpertise", partnerController.selectExpertise);
 
     app.use("/api", router);
 };
