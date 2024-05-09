@@ -1,5 +1,5 @@
 
-const UserModel = require("../models/findById.models");
+const UserModel = require("../models/findById.model");
 
 exports.getUserById = async (req, res) => {
     const userId = req.params.userId;

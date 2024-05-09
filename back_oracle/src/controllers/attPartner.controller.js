@@ -1,5 +1,5 @@
 // PartnerController.js
-const PartnerModel = require('../models/attPartner.models');
+const PartnerModel = require('../models/attPartner.model');
 
 const updatePartner = async (req, res) => {
   const partnerId = req.params.id;

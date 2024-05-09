@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
         // Se usuário = admin, tem permissão para cadastrar apenas admin e funcionario
         if (userType === "admin") {
             // Verifica se o tipo a ser cadastrado é admin ou funcionario
-            if (type !== "admin" && type !== "funcionário") {
+            if (type !== "admin" && type !== "consultor") {
                 return res
                     .status(403)
                     .send("Você não tem permissão para realizar esta operação");

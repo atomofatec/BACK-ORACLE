@@ -1,4 +1,4 @@
-const listUserExpertises = require("../models/listUserExpertises");
+const listUserExpertises = require("../models/listUserExpertises.model");
 
 exports.listagemUserExpertises = async (req, res) => {
     try {
