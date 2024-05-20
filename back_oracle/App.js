@@ -30,6 +30,7 @@ require("./src/routes/deletePartner.routes")(app);
 require("./src/routes/findById.routes")(app);
 require("./src/routes/listUserExpertises.routes")(app);
 require("./src/routes/deleteUsers.routes")(app);
+require("./src/routes/expertise.routes")(app);
 
 //app.use('/', listUsersRoute);
 
