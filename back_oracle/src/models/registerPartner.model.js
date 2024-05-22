@@ -2,16 +2,10 @@
 const sql = require("../db/index");
 const bcrypt = require("bcrypt");
 
-async function insertTest(userId, trackId, testNumber, testGrade) {
-    const query = "INSERT INTO tests (user_id, track_id, test_number, test_grade) VALUES ($1, $2, $3, $4) RETURNING *";
-    const values = [userId, trackId, testNumber, testGrade || 0]; // Atribuir 0 se testGrade for undefined
-    return await sql.query(query, values);
-}
-
-async function insertExpertise(userId, trackId) {
-    const query = "INSERT INTO expertises (user_id, track_id, total_test_grade) VALUES ($1, $2, $3) RETURNING *";
-    const totalTestGrade = 0;
-    const values = [userId, trackId, totalTestGrade];
+async function insertTracks(userId, trackId) {
+    const query = "INSERT INTO usertracks (user_id, track_id, completed) VALUES ($1, $2, $3) RETURNING *";
+    //const totalTestGrade = 0;
+    const values = [userId, trackId, false];
     return await sql.query(query, values);
 }
 
@@ -29,32 +23,13 @@ Partner.create = async (name, email, password) => {
         // Executar a consulta
         const result = await sql.query(query, values);
         const userId = result.rows[0].user_id;
-        
-        // Usa função para inserir os 3 tracks
-        const expertiseResults = [];
-        const trackIds = [1, 2, 3];
+
+        // Usa função para inserir os 4 tracks
+        const trackResults = [];
+        const trackIds = [1, 2, 3, 4];
         for (const trackId of trackIds) {
-            const result = await insertExpertise(userId, trackId);
-            expertiseResults.push(result);
-        }
-        
-        // Usa função inserir os 12 testes referentes as 3 tracks
-        const testResults = [];
-        for (let i = 1; i <= 4; i++) {
-            const result = await insertTest(userId, 1, i, 0);
-            testResults.push(result);
-        }
-
-        const testResults2 = [];
-        for (let i = 1; i <= 4; i++) {
-            const result = await insertTest(userId, 2, i, 0);
-            testResults2.push(result);
-        }
-
-        const testResults3 = [];
-        for (let i = 1; i <= 4; i++) {
-            const result = await insertTest(userId, 3, i, 0);
-            testResults3.push(result);
+            const result = await insertTracks(userId, trackId);
+            trackResults.push(result);
         }
 
         // Retornar o usuário criado
@@ -66,36 +41,39 @@ Partner.create = async (name, email, password) => {
     }
 };
 
-Partner.update = async (userId, trackId, testNumber, testGrade) => {
+Partner.selectWithUser = async (user_id) => {
     try {
-        const query =
-            "UPDATE tests SET test_grade = $4 WHERE user_id = $1 AND track_id = $2 AND test_number = $3 RETURNING *";
-
-        const values = [userId, trackId, testNumber, testGrade];
-        const result = await sql.query(query, values);
-        return result.rows[0];
-
-    } catch (error) {
-        console.error("Erro ao atualizar parceiro:", error.message);
-        throw error;
-    }   
-};
-
-Partner.selectWithUser = async (trackId) => {
-    try {
-        const query = `
-            SELECT e.*, u.* 
-            FROM expertises e
-            JOIN users u ON e.user_id = u.user_id
-            WHERE e.track_id = $1
-        `;
-        const values = [trackId];
+        const query = `SELECT * FROM userexpertises WHERE user_id = $1`;
+        const values = [user_id];
         const result = await sql.query(query, values);
         return result.rows;
     } catch (error) {
         console.error("Erro ao retornar expertises com usuário:", error.message);
         throw error;
-    }   
+    }
+};
+
+Partner.expertiseList = async () => {
+    try {
+        const query = `SELECT expertise_id, track_id, expertise_name FROM expertises`;
+        const result = await sql.query(query);
+        return result.rows;
+    } catch (error) {
+        console.error("Erro ao retornar expertises:", error.message);
+        throw error;
+    }
+};
+
+
+Partner.qualificationList = async () => {
+    try {
+        const query = `SELECT qualification_id, expertise_id, qualification_name FROM qualifications`;
+        const result = await sql.query(query);
+        return result.rows;
+    } catch (error) {
+        console.error("Erro ao retornar qualifications:", error.message);
+        throw error;
+    }
 };
 
 module.exports = Partner;
