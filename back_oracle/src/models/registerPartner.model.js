@@ -15,15 +15,10 @@ Partner.create = async (name, email, password) => {
     try {
         // Hash da senha
         //const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Consulta SQL para inserir o usuário
-        const query =
-            "INSERT INTO users (user_name, email, password, type, benefits) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+        const query = `INSERT INTO users (user_name, email, password, type, benefits) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
         const values = [name, email, password, "parceiro", false];
-        // Executar a consulta
         const result = await sql.query(query, values);
         const userId = result.rows[0].user_id;
-
         // Usa função para inserir os 4 tracks
         const trackResults = [];
         const trackIds = [1, 2, 3, 4];
@@ -31,11 +26,9 @@ Partner.create = async (name, email, password) => {
             const result = await insertTracks(userId, trackId);
             trackResults.push(result);
         }
-
         // Retornar o usuário criado
         return result.rows[0];
     } catch (error) {
-        // Tratamento de erros
         console.error("Erro ao criar parceiro:", error.message);
         throw error;
     }
@@ -64,7 +57,6 @@ Partner.expertiseList = async () => {
     }
 };
 
-
 Partner.qualificationList = async () => {
     try {
         const query = `SELECT qualification_id, expertise_id, qualification_name FROM qualifications`;
@@ -72,6 +64,18 @@ Partner.qualificationList = async () => {
         return result.rows;
     } catch (error) {
         console.error("Erro ao retornar qualifications:", error.message);
+        throw error;
+    }
+};
+
+Partner.updateUserQualification = async (user_id, qualification_id) => {
+    try {
+        const query = `UPDATE userqualifications SET completed = true WHERE user_id = $1 AND qualification_id = $2 RETURNING *`;
+        const values = [user_id, qualification_id];
+        const result = await sql.query(query, values);
+        return result.rows;
+    } catch (error) {
+        console.error("Erro ao atualizar expertises do usuário", error.message);
         throw error;
     }
 };
