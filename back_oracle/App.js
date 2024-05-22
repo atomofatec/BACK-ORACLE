@@ -29,6 +29,7 @@ require("./src/routes/attPartner.routes")(app);
 require("./src/routes/deletePartner.routes")(app);
 require("./src/routes/findById.routes")(app);
 require("./src/routes/deleteUsers.routes")(app);
+require("./src/routes/expertise.routes")(app);
 require("./src/routes/completionsCount.routes")(app);
 require("./src/routes/expertises.routes")(app);
 require("./src/routes/expertisesProgress.routes")(app);
