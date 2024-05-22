@@ -1,4 +1,3 @@
-const express = require('express');
 const { getQualificationsStatus } = require('../models/qualificationsStatus');
 
 const router = express.Router();
@@ -14,3 +13,12 @@ router.get('/qualifications/status', async (req, res) => {
 });
 
 module.exports = router;
+
+
+module.exports = (app) => {
+  const getQualificationsStatus = require('../models/qualificationsStatus.model')
+
+  var router = require("/qualificationsStatus", getQualificationsStatus)
+}
+
+app.use('/api', router);

@@ -1,16 +1,10 @@
-const express = require('express');
-const { getCompletionsCount } = require('../models/completionsCount');
+module.exports = (app) => {
+  const completionsCount = require('../controllers/completionsCount.controller');
 
-const router = express.Router();
+  var router = require("express").Router();
 
-router.get('/tracks/completions-count', async (req, res) => {
-  try {
-    const completionsCount = await getCompletionsCount();
-    res.json(completionsCount);
-  } catch (error) {
-    console.error('Error fetching completions count:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+  router.get("/completionsCount", completionsCount.findAll);
 
-module.exports = router;
+  app.use('/api', router);
+
+}

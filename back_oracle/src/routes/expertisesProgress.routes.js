@@ -1,16 +1,8 @@
-const express = require('express');
-const { getExpertisesProgress } = require('../models/expertisesProgress');
 
-const router = express.Router();
+module.exports = (app) => {
+  const getExpertisesProgress = require('../models/expertisesProgress.model');
 
-router.get('/tracks/expertises-progress', async (req, res) => {
-  try {
-    const expertisesProgress = await getExpertisesProgress();
-    res.json(expertisesProgress);
-  } catch (error) {
-    console.error('Error fetching expertises progress:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+  var router = require("/expertises", getExpertisesProgress)
 
-module.exports = router;
+  app.use('/api', router);
+}

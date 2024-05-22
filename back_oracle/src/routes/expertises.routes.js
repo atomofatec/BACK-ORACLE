@@ -1,16 +1,11 @@
-const express = require('express');
-const { getExpertises } = require('../models/expertises');
+module.exports = (app) => { 
+  const getExpertises = require('../models/expertises.model');
 
-const router = express.Router();
+  var router = require("express").Router();
 
-router.get('/expertises', async (req, res) => {
-  try {
-    const expertises = await getExpertises();
-    res.json(expertises);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+  router.get("/expertises", getExpertises.findAll);
 
-module.exports = router;
+  app.use('/api', router);
+
+}
+
