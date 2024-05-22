@@ -1,7 +1,8 @@
 module.exports = (app) => {
-  const getPartnersCount = require('../models/partnersCount.model')
+    const partnersCountController = require("../controllers/partnersCount.controller");
+    const router = require("express").Router();
 
-  var router = require("/partnersCount", getExpertisesProgress)
+    router.get("/partnersCount", partnersCountController.listPartnersCount);
 
-  app.use('/api', router);
-}
+    app.use("/api", router);
+};

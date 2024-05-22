@@ -1,8 +1,11 @@
 const sql = require("../db/index");
 
-const getExpertises = async () =>{
-    const result = await sql.query(`SELECT * FROM expertises`);
-    return result.rows;
+const expertisesModel = {
+    getExpertises: async () => {
+        const query = `SELECT * FROM expertises`;
+        const result = await sql.query(query);
+        return result.rows;
+    },
 };
 
-module.exports = getExpertises
+module.exports = expertisesModel;

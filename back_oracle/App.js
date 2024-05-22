@@ -25,11 +25,15 @@ require("./src/routes/login.routes")(app);
 require("./src/routes/registerPartner.routes")(app);
 require("./src/routes/registerAdmFunc.routes")(app);
 require("./src/routes/listUser.routes")(app);
-require('./src/routes/attPartner.routes')(app);
+require("./src/routes/attPartner.routes")(app);
 require("./src/routes/deletePartner.routes")(app);
 require("./src/routes/findById.routes")(app);
-require("./src/routes/expertisesProgress.routes")(app);
 require("./src/routes/deleteUsers.routes")(app);
+require("./src/routes/completionsCount.routes")(app);
+require("./src/routes/expertises.routes")(app);
+require("./src/routes/expertisesProgress.routes")(app);
+require("./src/routes/partnersCount.routes")(app);
+require("./src/routes/qualificationsStatus.routes")(app);
 
 //app.use('/', listUsersRoute);
 

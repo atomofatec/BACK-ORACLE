@@ -1,8 +1,11 @@
-
 module.exports = (app) => {
-  const getExpertisesProgress = require('../models/expertisesProgress.model');
+    const expertisesProgressController = require("../controllers/expertisesProgress.controller");
+    const router = require("express").Router();
 
-  var router = require("/expertises", getExpertisesProgress)
+    router.get(
+        "/expertisesProgress",
+        expertisesProgressController.listExpertisesProgress
+    );
 
-  app.use('/api', router);
-}
+    app.use("/api", router);
+};

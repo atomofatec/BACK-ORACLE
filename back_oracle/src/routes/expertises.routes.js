@@ -1,11 +1,8 @@
-module.exports = (app) => { 
-  const getExpertises = require('../models/expertises.model');
+module.exports = (app) => {
+    const expertisesController = require("../controllers/expertises.controller");
+    const router = require("express").Router();
 
-  var router = require("express").Router();
+    router.get("/expertises", expertisesController.listExpertises);
 
-  router.get("/expertises", getExpertises.findAll);
-
-  app.use('/api', router);
-
-}
-
+    app.use("/api", router);
+};

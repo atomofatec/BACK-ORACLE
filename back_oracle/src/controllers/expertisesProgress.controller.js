@@ -1,13 +1,15 @@
-const expertisesProgress = require("../models/expertisesProgress.model");
+const expertisesProgressModel = require("../models/expertisesProgress.model");
 
-//gera a resposta json e depois pegamos os dados
-exports.expertisesProgress = async (req, res) => {
+const listExpertisesProgress = async (req, res) => {
     try {
-        this.expertisesProgress().then((result) => {
-            res.status(200).json(result);
-        });
+        const result = await expertisesProgressModel.getExpertisesProgress();
+        res.status(200).json(result);
     } catch (error) {
-        console.log(error);
+        console.error("Erro ao listar progresso das especialidades: ", error);
+        res.status(500).send(
+            "Houve um problema ao listar o progresso das especialidades"
+        );
     }
-}
+};
 
+module.exports = { listExpertisesProgress };

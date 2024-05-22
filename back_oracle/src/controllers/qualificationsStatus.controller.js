@@ -1,13 +1,16 @@
-const qualificationsStatus = require('../models/partnersCount.model')
+const qualificationsStatusModel = require("../models/qualificationsStatus.model");
 
-//gera a resposta json e depois pegamos os dados
-exports.qualificationsStatus = async (req, res) => {
+const listQualificationsStatus = async (req, res) => {
     try {
-        this.qualificationsStatus().then((result) => {
-            res.status(200).json(result);
-        });
+        const result =
+            await qualificationsStatusModel.getQualificationsStatus();
+        res.status(200).json(result);
     } catch (error) {
-        console.log(error);
+        console.error("Erro ao listar status das qualificações:", error);
+        res.status(500).send(
+            "Houve um problema ao listar o status das qualificações"
+        );
     }
-}
+};
 
+module.exports = { listQualificationsStatus };

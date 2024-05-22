@@ -1,10 +1,11 @@
 module.exports = (app) => {
-  const completionsCount = require('../controllers/completionsCount.controller');
+    const completionsCountController = require("../controllers/completionsCount.controller");
+    const router = require("express").Router();
 
-  var router = require("express").Router();
+    router.get(
+        "/completionsCount",
+        completionsCountController.listagemCompletionsCount
+    );
 
-  router.get("/completionsCount", completionsCount.findAll);
-
-  app.use('/api', router);
-
-}
+    app.use("/api", router);
+};
