@@ -34,6 +34,7 @@ require("./src/routes/expertises.routes")(app);
 require("./src/routes/expertisesProgress.routes")(app);
 require("./src/routes/partnersCount.routes")(app);
 require("./src/routes/qualificationsStatus.routes")(app);
+require("./src/routes/user.routes")(app);
 
 //app.use('/', listUsersRoute);
 
