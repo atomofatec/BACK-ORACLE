@@ -5,9 +5,11 @@ module.exports = (app) => {
 
     router.post("/registerPartner", partnerController.createPartner);
 
-    router.post("/updateTest", partnerController.updateTest);
-
     router.post("/selectExpertise", partnerController.selectExpertise);
+
+    router.get("/expertiseList", partnerController.returnExpertises)
+    
+    router.get("/qualificationList", partnerController.returnQualifications)
 
     app.use("/api", router);
 };
