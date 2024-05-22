@@ -17,26 +17,39 @@ const partnerController = {
         }
     },
 
-    updateTest: async (req, res) => {
-        try {
-            const { userId, trackId, testNumber, testGrade } = req.body;
-            const updatedTest = await Partner.update(userId, trackId, testNumber, testGrade);
-            
-            res.status(201).json(updatedTest)
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    },
-
     selectExpertise: async (req, res) => {
         try {
-            const { trackId } = req.body;
-            const expertisesWithUser = await Partner.selectWithUser(trackId);
+            const { user_id } = req.body;
+            const expertisesWithUser = await Partner.selectWithUser(user_id);
             
             res.status(200).json(expertisesWithUser);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }    
+    },
+
+    returnExpertises: async(req, res) => {
+        try {
+            // Chama o método no modelo Partner para obter a lista de expertises
+            const expertises = await Partner.expertiseList();
+            // Responde com os dados selecionados
+            res.status(200).json(expertises);
+        } catch (error) {
+            console.error("Erro ao retornar expertises:", error.message);
+            res.status(500).json({ error: "Erro ao retornar expertises" });
+        }
+    },
+
+    returnQualifications: async(req, res) => {
+        try {
+            // Chama o método no modelo Partner para obter a lista de expertises
+            const qualifications = await Partner.qualificationList();
+            // Responde com os dados selecionados
+            res.status(200).json(qualifications);
+        } catch (error) {
+            console.error("Erro ao retornar qualifications:", error.message);
+            res.status(500).json({ error: "Erro ao retornar qualifications" });
+        }
     }
 
 };
