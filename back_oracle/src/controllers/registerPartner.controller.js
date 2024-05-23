@@ -50,8 +50,18 @@ const partnerController = {
             console.error("Erro ao retornar qualifications:", error.message);
             res.status(500).json({ error: "Erro ao retornar qualifications" });
         }
-    }
+    },
 
+    updateUserQualifications: async (req, res) => {
+        try {
+            const { user_id, qualification_id } = req.body;
+            const userQualifications = await Partner.updateUserQualification(user_id, qualification_id);
+            
+            res.status(200).json(userQualifications);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }    
+    },
 };
 
 module.exports = partnerController;
