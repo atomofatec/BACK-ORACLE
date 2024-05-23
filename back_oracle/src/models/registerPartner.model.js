@@ -80,5 +80,28 @@ Partner.updateUserQualification = async (user_id, qualification_id) => {
     }
 };
 
-module.exports = Partner;
+Partner.updateUserTrack = async (user_id, track_id) => {
+    try {
+        const query = `UPDATE usertracks SET completed = true WHERE user_id = $1 AND track_id = $2 RETURNING *`;
+        const values = [user_id, track_id];
+        const result = await sql.query(query, values);
+        return result.rows;
+    } catch (error) {
+        console.error("Erro ao atualizar expertises do usuário", error.message);
+        throw error;
+    }
+};
 
+Partner.updateUserExpertise = async (user_id, expertise_id) => {
+    try {
+        const query = `UPDATE userexpertises SET completed = true WHERE user_id = $1 AND expertise_id = $2 RETURNING *`;
+        const values = [user_id, expertise_id];
+        const result = await sql.query(query, values);
+        return result.rows;
+    } catch (error) {
+        console.error("Erro ao atualizar expertises do usuário", error.message);
+        throw error;
+    }
+};
+
+module.exports = Partner;
