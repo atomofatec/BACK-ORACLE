@@ -5,8 +5,8 @@ const deletePartner = async (req, res) => {
     const userType = req.body.userType; // Captura o tipo de usuário
 
     try {
-        // Verifica se o tipo de usuário é "funcionário"
-        if (userType !== "funcionário") {
+        // Verifica se o tipo de usuário é "consultor"
+        if (userType !== "consultor") {
             return res.status(403).send("Você não tem permissão para realizar esta operação");
         }
 
@@ -19,7 +19,7 @@ const deletePartner = async (req, res) => {
             res.status(404).send("Parceiro não encontrado");
         }
     } catch (error) {
-        console.error("Erro ao excluir parceiro",);
+        console.error("Erro ao excluir parceiro:", error.message);
         res.status(500).send("Houve um problema ao excluir o parceiro");
     }
 };

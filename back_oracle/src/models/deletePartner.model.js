@@ -4,25 +4,20 @@ const Partner = {};
 
 Partner.deleteById = async (partnerId) => {
     try {
-        // Exclui os registros relacionados na tabela "tests"
-        const deleteTestsQuery = "DELETE FROM tests WHERE user_id = $1";
-        await sql.query(deleteTestsQuery, [partnerId]);
+        // Excluir os registros relacionados na tabela "UserTracks"
+        const deleteTracksQuery = "DELETE FROM UserTracks WHERE user_id = $1";
+        await sql.query(deleteTracksQuery, [partnerId]);
 
-        // Exclui os registros relacionados na tabela "expertises"
-        const deleteExpertisesQuery = "DELETE FROM expertises WHERE user_id = $1";
+        // Excluir os registros relacionados na tabela "UserExpertises"
+        const deleteExpertisesQuery = "DELETE FROM UserExpertises WHERE user_id = $1";
         await sql.query(deleteExpertisesQuery, [partnerId]);
 
-        // Verifica se o usuário a ser excluído é do tipo "parceiro"
-        const queryUserType = "SELECT type FROM users WHERE user_id = $1";
-        const resultUserType = await sql.query(queryUserType, [partnerId]);
-        const userType = resultUserType.rows[0].type;
+        // Excluir os registros relacionados na tabela "UserQualifications"
+        const deleteQualificationsQuery = "DELETE FROM UserQualifications WHERE user_id = $1";
+        await sql.query(deleteQualificationsQuery, [partnerId]);
 
-        if (userType !== "parceiro") {
-            throw new Error("Você não tem permissão para excluir este usuário");
-        }
-
-        // Se for do tipo "parceiro", prossegue com a exclusão
-        const deleteQuery = "DELETE FROM users WHERE user_id = $1";
+        // Excluir o usuário da tabela "Users"
+        const deleteQuery = "DELETE FROM Users WHERE user_id = $1";
         await sql.query(deleteQuery, [partnerId]);
 
         return true; // Retorna verdadeiro se a exclusão for bem-sucedida
