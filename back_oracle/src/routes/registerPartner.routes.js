@@ -7,9 +7,15 @@ module.exports = (app) => {
 
     router.post("/selectExpertise", partnerController.selectExpertise);
 
-    router.get("/expertiseList", partnerController.returnExpertises)
+    router.get("/expertiseList", partnerController.returnExpertises);
     
-    router.get("/qualificationList", partnerController.returnQualifications)
+    router.get("/qualificationList", partnerController.returnQualifications);
+
+    router.post("/userQualifications", partnerController.updateUserQualifications);
+
+    router.post("/userTracks", partnerController.updateUserTracks);
+
+    router.post("/userExpertises", partnerController.updateUserExpertises);
 
     app.use("/api", router);
 };
