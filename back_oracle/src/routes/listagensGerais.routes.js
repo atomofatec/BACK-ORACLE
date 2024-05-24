@@ -8,8 +8,7 @@ router.get(
     expertiseController.getExpertisesByTrack
 );
 
-router.get(
-    "/listarQualifications/:expertise_id",
+router.get('/expertises/:expertise_id/users/:user_id/qualifications',
     expertiseController.getQualificationsByExpertiseId
 );
 

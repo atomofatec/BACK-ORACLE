@@ -12,11 +12,9 @@ const getExpertisesByTrack = async (req, res) => {
 };
 
 const getQualificationsByExpertiseId = async (req, res) => {
-    const { expertise_id } = req.params;
+    const { expertise_id, user_id } = req.params;
     try {
-        const qualifications = await Expertise.getQualificationsByExpertiseId(
-            expertise_id
-        );
+        const qualifications = await Expertise.getQualificationsByExpertiseId(expertise_id, user_id);
         res.json(qualifications);
     } catch (error) {
         console.error("Error fetching qualifications:", error);

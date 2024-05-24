@@ -13,14 +13,28 @@ const getExpertisesByTrackId = async (track_id) => {
     }
 };
 
-const getQualificationsByExpertiseId = async (expertise_id) => {
+const getQualificationsByExpertiseId = async (expertise_id, user_id) => {
     const client = await pool.connect();
     try {
         const res = await client.query(
-            "SELECT * FROM Qualifications WHERE expertise_id = $1",
-            [expertise_id]
+            `SELECT 
+                q.qualification_name,
+                q.qualification_id,
+                q.expertise_id,
+                uq.user_id,
+                uq.completed
+            FROM 
+                Qualifications q
+            JOIN 
+                UserQualifications uq ON q.qualification_id = uq.qualification_id
+            WHERE 
+                q.expertise_id = $1 AND uq.user_id = $2`,
+            [expertise_id, user_id]
         );
         return res.rows;
+    } catch (error) {
+        console.error('Error executing query', error);
+        throw error;
     } finally {
         client.release();
     }
