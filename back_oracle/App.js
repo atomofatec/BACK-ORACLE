@@ -1,17 +1,24 @@
 const express = require("express");
 const cors = require("cors");
+const app = express(); // Inicializa o servidor
+const { run } = require("./src/db/mongo")
 //const listUsersRoute = require("./src/models/listUsersRoute");
 
-const app = express(); // Inicializa o servidor
+async function setupDatabase() {
+    try {
+        await run();
+    } catch (error) {
+        console.error("Erro ao configurar o banco de dados:", error);
+    }
+}
 
+setupDatabase();
 // var corsOptions = {
 //   origin: "http://localhost:3000", //front
 // };
-
 // app.use(cors(corsOptions));
 
 app.use(cors()); // Aceita requisições de qualquer origem
-
 app.use(express.json()); // Aceita requisições no formato JSON
 app.use(express.urlencoded({ extended: true })); // Aceita requisições no formato URL
 
@@ -37,6 +44,7 @@ require("./src/routes/partnersCount.routes")(app);
 require("./src/routes/qualificationsStatus.routes")(app);
 require("./src/routes/user.routes")(app);
 require("./src/routes/listagensGerais.routes")(app);
+require("./src/routes/tracks.route")(app);
 
 //app.use('/', listUsersRoute);
 
@@ -45,3 +53,4 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
+
