@@ -17,6 +17,8 @@
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.13",
     "mongodb": "^6.7.0",
     "mongoose": "^8.4.1",
     "pg": "^8.11.5",

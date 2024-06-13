@@ -43,6 +43,7 @@ require("./src/routes/expertisesProgress.routes")(app);
 require("./src/routes/partnersCount.routes")(app);
 require("./src/routes/qualificationsStatus.routes")(app);
 require("./src/routes/user.routes")(app);
+require("./src/routes/passwordReset.routes")(app);
 require("./src/routes/listagensGerais.routes")(app);
 require("./src/routes/tracks.route")(app);
 
