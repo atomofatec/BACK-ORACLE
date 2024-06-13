@@ -46,6 +46,18 @@ Partner.selectWithUser = async (user_id) => {
     }
 };
 
+Partner.selectTrackById = async (user_id) => {
+    try {
+        const query = `SELECT * FROM usertracks WHERE user_id = $1 and completed = $2`;
+        const values = [user_id, true];
+        const result = await sql.query(query, values);
+        return result.rows;
+    } catch (error) {
+        console.error("Erro ao retornar expertises com usuário:", error.message);
+        throw error;
+    }
+};
+
 Partner.expertiseList = async () => {
     try {
         const query = `SELECT expertise_id, track_id, expertise_name FROM expertises`;
