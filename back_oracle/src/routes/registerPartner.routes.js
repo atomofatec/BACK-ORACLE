@@ -16,6 +16,8 @@ module.exports = (app) => {
     router.post("/userTracks", partnerController.updateUserTracks);
 
     router.post("/userExpertises", partnerController.updateUserExpertises);
+    
+    router.post("/tracksById/:user_id", partnerController.selectTracks);
 
     app.use("/api", router);
 };

@@ -29,6 +29,17 @@ const partnerController = {
         }    
     },
 
+    selectTracks: async (req, res) => {
+        try {
+            const { user_id } = req.params;
+            const tracksById = await Partner.selectTrackById(user_id);
+            
+            res.status(200).json(tracksById);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }    
+    },
+    
     returnExpertises: async(req, res) => {
         try {
             // Chama o método no modelo Partner para obter a lista de expertises
