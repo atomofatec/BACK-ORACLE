@@ -11,7 +11,7 @@ const User = function (user) {
 User.findById = async (id) => {
     const result = await sql.query(
         `
-        SELECT user_id, email, type
+        SELECT user_id, email, type, password
         FROM users
         WHERE user_id = ($1)
     `,

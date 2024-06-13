@@ -46,6 +46,7 @@ require("./src/routes/user.routes")(app);
 require("./src/routes/passwordReset.routes")(app);
 require("./src/routes/listagensGerais.routes")(app);
 require("./src/routes/tracks.route")(app);
+require("./src/routes/updatePassword.routes")(app);
 
 //app.use('/', listUsersRoute);
 
