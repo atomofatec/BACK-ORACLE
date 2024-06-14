@@ -29,8 +29,8 @@ exports.requestPasswordReset = async (req, res) => {
             to: email, // Email fornecido na requisição
             subject: 'Recuperação de Senha',
             html: `<p>Olá ${email},</p>
-                   <p>Para trocar a senha, clique no link abaixo:</p>
-                   <p><a href="http://localhost:3000/recuperarsenha/${token}">Trocar senha</a></p>`,
+                   <p>Para trocar a senha, utilize o token abaixo:</p>
+                   <p>${token}</p>`,
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
